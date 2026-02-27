@@ -14,4 +14,4 @@ def status():
     return jsonify(controller.current_state)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
