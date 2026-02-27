@@ -1,0 +1,30 @@
+from time import sleep
+from gpiozero import LED
+from RPLCD.i2c import CharLCD
+
+red = [LED(2), LED(17), LED(10), LED(0)]
+yellow = [LED(3), LED(27), LED(9), LED(5)]
+green = [LED(4), LED(22), LED(11), LED(6)]
+
+lcd = CharLCD('PCF8574', 0x27, cols=16, rows=2)
+
+def run_hardware(junction, green_time):
+
+    # Yellow ON
+    yellow[junction].on()
+    sleep(3)
+    yellow[junction].off()
+
+    # Green ON
+    red[junction].off()
+    green[junction].on()
+
+    for sec in range(green_time, -1, -1):
+        lcd.clear()
+        lcd.write_string(f"Junc {junction+1}")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(f"{sec} sec")
+        sleep(1)
+
+    green[junction].off()
+    red[junction].on()
