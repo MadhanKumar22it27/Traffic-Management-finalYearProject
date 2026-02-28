@@ -10,18 +10,27 @@ lcd = CharLCD('PCF8574', 0x27, cols=16, rows=2)
 
 def run_hardware(junction, green_time):
 
-    # Yellow ON
+    # Safe reset
+    for i in range(4):
+        green[i].off()
+        yellow[i].off()
+        red[i].on()
+
+    # Yellow
     yellow[junction].on()
     sleep(3)
     yellow[junction].off()
 
-    # Green ON
+    # Green
     red[junction].off()
     green[junction].on()
 
+    lcd.clear()
+    lcd.write_string(f"Junc {junction+1}")
+
     for sec in range(green_time, -1, -1):
-        lcd.clear()
-        lcd.write_string(f"Junc {junction+1}")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(" " * 16)
         lcd.cursor_pos = (1, 0)
         lcd.write_string(f"{sec} sec")
         sleep(1)
