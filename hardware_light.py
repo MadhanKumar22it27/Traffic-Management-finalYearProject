@@ -2,9 +2,9 @@ from time import sleep
 from gpiozero import LED
 from RPLCD.i2c import CharLCD
 
-red = [LED(2), LED(17), LED(10), LED(0)]
-yellow = [LED(3), LED(27), LED(9), LED(5)]
-green = [LED(4), LED(22), LED(11), LED(6)]
+red = [LED(14), LED(17), LED(10), LED(0)]
+yellow = [LED(15), LED(27), LED(9), LED(5)]
+green = [LED(18), LED(22), LED(11), LED(6)]
 
 lcd = CharLCD('PCF8574', 0x27, cols=16, rows=2)
 
