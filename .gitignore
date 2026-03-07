@@ -7,6 +7,7 @@ __pycache__/
 venv/
 ENV/
 env/
+main/
 # Exclude Python virtual environments and site-packages
 */lib/python*/site-packages/
 # Distribution / packaging
